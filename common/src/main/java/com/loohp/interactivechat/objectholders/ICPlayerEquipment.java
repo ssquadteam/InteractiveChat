@@ -304,6 +304,17 @@ public class ICPlayerEquipment implements EntityEquipment {
     }
 
     @Override
+    public float getDropChance(EquipmentSlot slot) {
+        Float chance = dropChance.get(slot);
+        return chance == null ? 0.0F : chance;
+    }
+
+    @Override
+    public void setDropChance(EquipmentSlot slot, float chance) {
+        dropChance.put(slot, chance);
+    }
+
+    @Override
     public Entity getHolder() {
         return null;
     }

@@ -82,7 +82,7 @@ public class ICPlayerFactory {
             @EventHandler(priority = EventPriority.MONITOR)
             public void onJoinConfirm(PlayerLoginEvent event) {
                 if (!event.getResult().equals(Result.ALLOWED)) {
-                    onLeave(new PlayerQuitEvent(event.getPlayer(), null));
+                    onLeave(new PlayerQuitEvent(event.getPlayer(), (net.kyori.adventure.text.Component) null));
                 } else {
                     UUID uuid = event.getPlayer().getUniqueId();
                     LOGGING_IN.remove(uuid);

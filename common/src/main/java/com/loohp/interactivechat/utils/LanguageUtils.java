@@ -329,8 +329,7 @@ public class LanguageUtils {
                         }
                     }
                 } else {
-                    BannerMeta meta = (BannerMeta) itemStack.getItemMeta();
-                    color = meta.getBaseColor();
+                    color = DyeColor.WHITE;
                 }
 
                 path += "." + color.name().toLowerCase();

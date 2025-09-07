@@ -1,7 +1,8 @@
 plugins {
     id 'java'
-    id 'com.github.johnrengelman.shadow'
 }
+
+apply plugin: 'com.gradleup.shadow'
 
 dependencies {
     implementation project(':abstraction')
@@ -71,7 +72,7 @@ jar {
     enabled = false
 }
 
-shadowJar {
+tasks.named('shadowJar') {
     archiveClassifier.set('')
     mergeServiceFiles()
 
@@ -96,4 +97,6 @@ shadowJar {
 }
 
 // Make sure assemble builds the shaded jar
-assemble.dependsOn shadowJar
+tasks.named('assemble') {
+    dependsOn(tasks.named('shadowJar'))
+}
