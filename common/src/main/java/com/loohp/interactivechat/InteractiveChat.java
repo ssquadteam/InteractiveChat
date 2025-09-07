@@ -320,6 +320,7 @@ public class InteractiveChat extends JavaPlugin {
     public static AtomicLong messagesCounter = new AtomicLong(0);
 
     public static boolean parsePAPIOnMainThread = false;
+    public static int parsePAPITimeoutMs = 1500;
 
     public static Boolean bungeecordMode = false;
     public static Map<String, List<ICPlaceholder>> remotePlaceholderList = new HashMap<>();

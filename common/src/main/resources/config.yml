@@ -73,6 +73,9 @@ Settings:
   ChatPreviewRemoveClickAndHover: false
   #Whether to parse PlaceholderAPI placeholders on the main thread
   ParsePAPIOnMainThread: false
+  #Timeout in milliseconds for PlaceholderAPI parsing when ParsePAPIOnMainThread is enabled
+  #Increase this value if you experience timeout issues with complex placeholders
+  ParsePAPITimeoutMs: 1500
   ItemTagMaxLength: 30767
   PacketStringMaxLength: 32767
   SendOriginalMessageIfExceedLengthLimit: true

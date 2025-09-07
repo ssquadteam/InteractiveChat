@@ -290,7 +290,8 @@ public class ProcessExternalMessage {
             try {
                 TimeUnit.MILLISECONDS.sleep(InteractiveChat.remoteDelay);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Thread.currentThread().interrupt();
+                InteractiveChat.plugin.getLogger().warning("ProcessExternalMessage was interrupted during remote delay");
             }
             server = sender.get().getServer();
         } else {

@@ -114,6 +114,7 @@ public class ConfigManager {
         InteractiveChat.paperChatEventEditOriginalMessageField = getConfig().getBoolean("Settings.PaperChatEventEditOriginalMessageField");
 
         InteractiveChat.parsePAPIOnMainThread = getConfig().getBoolean("Settings.ParsePAPIOnMainThread");
+        InteractiveChat.parsePAPITimeoutMs = getConfig().getInt("Settings.ParsePAPITimeoutMs", 1500);
         InteractiveChat.useAccurateSenderFinder = getConfig().getBoolean("Settings.UseAccurateSenderParser");
         InteractiveChat.tagEveryIdentifiableMessage = getConfig().getBoolean("Settings.TagEveryIdentifiableMessage");
 

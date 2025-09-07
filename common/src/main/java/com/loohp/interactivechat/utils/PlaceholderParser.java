@@ -68,24 +68,34 @@ public class PlaceholderParser {
                 } else {
                     Scheduler.runTask(InteractiveChat.plugin, () -> future.complete(parse0(offlineICPlayer, str)));
                 }
-                return future.get(1500, TimeUnit.MILLISECONDS);
-            } catch (InterruptedException | ExecutionException e) {
+                return future.get(InteractiveChat.parsePAPITimeoutMs, TimeUnit.MILLISECONDS);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                InteractiveChat.plugin.getLogger().warning("PlaceholderParser was interrupted, falling back to direct parsing for: " + str);
+                return fallbackParse(offlineICPlayer, str);
+            } catch (ExecutionException e) {
+                InteractiveChat.plugin.getLogger().warning("PlaceholderParser execution failed: " + e.getCause());
                 e.printStackTrace();
-                return "";
+                return fallbackParse(offlineICPlayer, str);
             } catch (TimeoutException e) {
-                ICPlayer player = offlineICPlayer.getPlayer();
-                if (player == null) {
-                    return PlaceholderAPI.setPlaceholders(offlineICPlayer.getLocalOfflinePlayer(), str);
-                } else {
-                    if (player.isLocal()) {
-                        return PlaceholderAPI.setPlaceholders(player.getLocalPlayer(), str);
-                    } else {
-                        return "";
-                    }
-                }
+                InteractiveChat.plugin.getLogger().warning("PlaceholderParser timed out after " + InteractiveChat.parsePAPITimeoutMs + "ms, falling back to direct parsing for: " + str);
+                return fallbackParse(offlineICPlayer, str);
             }
         } else {
             return parse0(offlineICPlayer, str);
+        }
+    }
+
+    private static String fallbackParse(OfflineICPlayer offlineICPlayer, String str) {
+        ICPlayer player = offlineICPlayer.getPlayer();
+        if (player == null) {
+            return PlaceholderAPI.setPlaceholders(offlineICPlayer.getLocalOfflinePlayer(), str);
+        } else {
+            if (player.isLocal()) {
+                return PlaceholderAPI.setPlaceholders(player.getLocalPlayer(), str);
+            } else {
+                return str;
+            }
         }
     }
 
