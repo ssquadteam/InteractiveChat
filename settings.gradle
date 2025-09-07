@@ -1,0 +1,2 @@
+rootProject.name = 'InteractiveChat'
+include 'abstraction', 'V1_21_8', 'common'
