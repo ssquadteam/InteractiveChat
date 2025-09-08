@@ -146,6 +146,7 @@ public class InteractiveChat extends JavaPlugin {
     public static Boolean mysqlPDBHook = false;
     public static Boolean chatControlRedHook = false;
     public static Boolean bedrockHook = false;
+    public static Boolean tritonHook = false;
 
     public static Permission perms = null;
 
@@ -623,6 +624,11 @@ public class InteractiveChat extends JavaPlugin {
             }
             getServer().getPluginManager().registerEvents(new BedrockHook(), this);
             bedrockHook = true;
+        }
+
+        if (isPluginEnabled("Triton")) {
+            getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[InteractiveChat] InteractiveChat has hooked into Triton!");
+            tritonHook = true;
         }
 
         if (isPluginEnabled("VentureChat") && isPluginEnabled("ProtocolLib")) {
